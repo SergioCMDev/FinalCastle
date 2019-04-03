@@ -10,11 +10,20 @@
     <Filter Include="include">
       <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\Kinematics">
+      <UniqueIdentifier>{6DB75EEB-599B-1F41-C2FB-1994AEFE09C3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Headers\MathLib">
       <UniqueIdentifier>{BE6673CF-2AF2-E093-3303-64889F0D3D94}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\SDL">
       <UniqueIdentifier>{0829D931-74DE-5127-FDD2-4BFE6987482B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Steering">
+      <UniqueIdentifier>{466544A8-325E-63FA-5B90-487F47E84206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Steering\Delegated">
+      <UniqueIdentifier>{210E9DDF-0D1E-49B0-76D7-ADCE62063849}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{56EB95D1-428D-C0A7-2B48-D4FB178947F8}</UniqueIdentifier>
@@ -24,10 +33,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\agent.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Astar.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\body.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\debug_draw.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\defines.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\game.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mind.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Node.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\include\sprite.h">
@@ -41,6 +68,18 @@
     </ClInclude>
     <ClInclude Include="..\include\world.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Kinematics\KinematicArrive.h">
+      <Filter>include\Kinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Kinematics\KinematicFlee.h">
+      <Filter>include\Kinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Kinematics\kinematicSeek.h">
+      <Filter>include\Kinematics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Kinematics\KinematicWander.h">
+      <Filter>include\Kinematics</Filter>
     </ClInclude>
     <ClInclude Include="..\include\mathlib\defines.h">
       <Filter>Headers\MathLib</Filter>
@@ -312,10 +351,43 @@
     <ClInclude Include="..\include\SDL\SDL_vulkan.h">
       <Filter>include\SDL</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Astar.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="..\include\Steering\Align.h">
+      <Filter>include\Steering</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Node.h">
+    <ClInclude Include="..\include\Steering\Arrive.h">
+      <Filter>include\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Cohesion.h">
+      <Filter>include\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Flee.h">
+      <Filter>include\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Seek.h">
+      <Filter>include\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Separation.h">
+      <Filter>include\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\VelocityMatching.h">
+      <Filter>include\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Delegated\Face.h">
+      <Filter>include\Steering\Delegated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Delegated\Flocking.h">
+      <Filter>include\Steering\Delegated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Delegated\LookGoing.h">
+      <Filter>include\Steering\Delegated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Delegated\Pursue.h">
+      <Filter>include\Steering\Delegated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Steering\Delegated\Wander.h">
+      <Filter>include\Steering\Delegated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Read_Map.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -323,7 +395,25 @@
     <ClCompile Include="..\tests\EJ03.AStar\main.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Astar.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Node.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\agent.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\body.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\debug_draw.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\game.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mind.cc">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\src\sprite.cc">
@@ -365,10 +455,7 @@
     <ClCompile Include="..\src\mathlib\vec4_sse.cc">
       <Filter>Source\MathLib</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Astar.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Node.cpp">
+    <ClCompile Include="..\read_map.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

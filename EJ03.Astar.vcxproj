@@ -125,14 +125,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\agent.h" />
     <ClInclude Include="..\include\Astar.h" />
+    <ClInclude Include="..\include\body.h" />
     <ClInclude Include="..\include\debug_draw.h" />
     <ClInclude Include="..\include\defines.h" />
+    <ClInclude Include="..\include\game.h" />
+    <ClInclude Include="..\include\mind.h" />
     <ClInclude Include="..\include\Node.h" />
+    <ClInclude Include="..\include\Read_Map.h" />
     <ClInclude Include="..\include\sprite.h" />
     <ClInclude Include="..\include\texture.h" />
     <ClInclude Include="..\include\window.h" />
     <ClInclude Include="..\include\world.h" />
+    <ClInclude Include="..\include\Kinematics\KinematicArrive.h" />
+    <ClInclude Include="..\include\Kinematics\KinematicFlee.h" />
+    <ClInclude Include="..\include\Kinematics\kinematicSeek.h" />
+    <ClInclude Include="..\include\Kinematics\KinematicWander.h" />
     <ClInclude Include="..\include\mathlib\defines.h" />
     <ClInclude Include="..\include\mathlib\mat3.h" />
     <ClInclude Include="..\include\mathlib\mat4.h" />
@@ -223,13 +232,36 @@
     <ClInclude Include="..\include\SDL\SDL_version.h" />
     <ClInclude Include="..\include\SDL\SDL_video.h" />
     <ClInclude Include="..\include\SDL\SDL_vulkan.h" />
+    <ClInclude Include="..\include\Steering\Align.h" />
+    <ClInclude Include="..\include\Steering\Arrive.h" />
+    <ClInclude Include="..\include\Steering\Cohesion.h" />
+    <ClInclude Include="..\include\Steering\Flee.h" />
+    <ClInclude Include="..\include\Steering\Seek.h" />
+    <ClInclude Include="..\include\Steering\Separation.h" />
+    <ClInclude Include="..\include\Steering\VelocityMatching.h" />
+    <ClInclude Include="..\include\Steering\Delegated\Face.h" />
+    <ClInclude Include="..\include\Steering\Delegated\Flocking.h" />
+    <ClInclude Include="..\include\Steering\Delegated\LookGoing.h" />
+    <ClInclude Include="..\include\Steering\Delegated\Pursue.h" />
+    <ClInclude Include="..\include\Steering\Delegated\Wander.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Astar.cpp" />
-    <ClCompile Include="..\src\Node.cpp" />
+    <ClCompile Include="..\read_map.cpp" />
     <ClCompile Include="..\tests\EJ03.AStar\main.cpp">
     </ClCompile>
+    <ClCompile Include="..\src\Astar.cpp">
+    </ClCompile>
+    <ClCompile Include="..\src\Node.cpp">
+    </ClCompile>
+    <ClCompile Include="..\src\agent.cc">
+    </ClCompile>
+    <ClCompile Include="..\src\body.cc">
+    </ClCompile>
     <ClCompile Include="..\src\debug_draw.cc">
+    </ClCompile>
+    <ClCompile Include="..\src\game.cc">
+    </ClCompile>
+    <ClCompile Include="..\src\mind.cc">
     </ClCompile>
     <ClCompile Include="..\src\sprite.cc">
     </ClCompile>
