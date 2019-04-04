@@ -1,3 +1,5 @@
+#ifndef __NODE_H__
+#define __NODE_H__ 1
 #pragma once
 class Node
 {
@@ -18,3 +20,4 @@ public:
 private:
 };
 
+#endif

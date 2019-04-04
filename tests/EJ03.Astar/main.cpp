@@ -1,21 +1,20 @@
-#include <defines.h> 
-#include <Node.h>
-#include <sprite.h>
-#include <vector>
-#include <iostream>
-#include <limits>
-#include "texture.h"
-#include <algorithm>
+//#include <defines.h> 
+//#include <Node.h>
+//#include <sprite.h>
+//#include <vector>
+//#include <iostream>
+//#include <limits>
+//#include "texture.h"
+//#include <algorithm>
 #include <Game.h>
-#include <Read_Map.h>
+//#include <Read_Map.h>
 #include <../include/SDL/SDL.h>
 #include <window.h>
 #include <ctime>
 
 #define SDL_MAIN_HANDLED
 int main(int argc, char* argv[]) {
-	//Texture t = Texture();
-	//t.loadFromFile(MAP);
+
 	srand(time(NULL));
 
 	Window::instance().init(GAME_NAME, WINDOW_WIDTH, WINDOW_HEIGHT);

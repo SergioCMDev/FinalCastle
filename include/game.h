@@ -24,7 +24,7 @@ class Game {
     void init();
     void start();
     void shutdown();
-	std::vector<Node> listaCerrada;
+	//std::vector<Node> listaCerrada;
 	Astar astar;
 
   private:
@@ -35,7 +35,6 @@ class Game {
     bool quit_ = false;
     Sprite fps_sprite_;
     TTF_Font* font_ = nullptr;
-
     World world_;
 
     int8_t slo_mo_ = 1;

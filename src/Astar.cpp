@@ -25,11 +25,11 @@ Astar::Astar() {
 
 
 void Astar::CreatePathFromDestination(Node *nodoDestino, std::vector<Node> lista) {
-	Node* node = nodoDestino->_parent;
+	/*Node* node = nodoDestino->_parent;
 	do {
 		lista.push_back(*node);
 		node = node->_parent;
-	} while (node->_parent != NULL);
+	} while (node->_parent != NULL);*/
 
 }
 
@@ -119,7 +119,7 @@ void Astar::GetPath() {
 		int FMinor = std::numeric_limits<int>::max();
 		Node nodeWithMinorF;
 		GetMinorFNode(listaAbierta, FMinor, nodeWithMinorF);
-
+		loading = true;
 		listaCerrada.push_back(nodeWithMinorF);
 		GetAdyacentes(nodeWithMinorF);
 		RemoveFromList(listaAbierta, nodeWithMinorF);
@@ -150,6 +150,8 @@ void Astar::GetPath() {
 			}
 		}
 		nodeWithMinorF.Fvalue = std::numeric_limits<int>::max();
+		std::cout << "Loading..." << std::endl;
 	}
-	CreatePathFromDestination(&nodoDestino, camino);
+	//CreatePathFromDestination(&nodoDestino, camino);
+	loading = !loading;
 }

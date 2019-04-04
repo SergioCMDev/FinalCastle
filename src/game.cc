@@ -76,31 +76,34 @@ void Game::handleInput() {
 		}
 
 		if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP) {
-			if (e.type == SDL_MOUSEBUTTONUP) {
-				int x, y;
-				SDL_GetMouseState(&x, &y);
-				if (destinoX > 0 && destinoY > 0) {
-					origenX = -1;
-					origenY = -1;
-					destinoX = -1;
-					destinoY = -1;
-				}
-				if (origenX < 0 && origenY < 0) {
-					origenX = x;
-					origenY = y;
-				}
-				else {
-					destinoX = x;
-					destinoY = y;
-					Astar astar(origenX, origenY, destinoX, destinoY);
-					astar.GetPath();
-					//astar.GetPath(origenX, origenY, destinoX, destinoY);
+			if (!astar.loading) {
+
+				if (e.type == SDL_MOUSEBUTTONUP) {
+					int x, y;
+					SDL_GetMouseState(&x, &y);
+					if (destinoX > 0 && destinoY > 0) {
+						origenX = -1;
+						origenY = -1;
+						destinoX = -1;
+						destinoY = -1;
+					}
+					if (origenX < 0 && origenY < 0) {
+						origenX = x;
+						origenY = y;
+					}
+					else {
+						destinoX = x;
+						destinoY = y;
+						astar = Astar(origenX, origenY, destinoX, destinoY);
+						astar.GetPath();
+						//astar.GetPath(origenX, origenY, destinoX, destinoY);
+						render();
+					}
+
+					//world_.target()->getKinematic()->position = Vec2(x, y);
+
 
 				}
-
-				//world_.target()->getKinematic()->position = Vec2(x, y);
-
-
 			}
 		}
 	}
@@ -118,20 +121,19 @@ void Game::render() {
 	fps_sprite_.render();
 	Sprite s;
 	s.loadFromFile(MAP);
-	/*s.render();
+	s.render();
+	world_.render();
 	if (!astar.listaCerrada.empty()) {
-		for (std::vector<Node>::iterator it = listaCerrada.begin(); it != listaCerrada.end(); ++it)
+		for (std::vector<Node>::iterator it = astar.listaCerrada.begin(); it != astar.listaCerrada.end(); ++it)
 		{
 			Sprite s;
 			s.loadFromFile(GUARD);
 			s.setPosition(((Node)*it).posX, ((Node)*it).posY);
 			s.render();
 		}
-		
-	}*/
 
-	s.render();
-	world_.render();
+	}
+
 	DebugDraw::render();
 
 	SDL_RenderPresent(renderer);
