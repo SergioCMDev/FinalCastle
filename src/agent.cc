@@ -8,21 +8,21 @@
 #include <agent.h>
 #include <world.h>
 
-void Agent::init(World* world, const Body::Color color, const Body::Type type) {
-  world_ = world;
-  body_.init(color, type, this);
-  mind_.init(world, &body_);
+void Agent::init(World* world, const Body::Type type, const Body::AgentType agentType) {
+	world_ = world;
+	body_.init(type, this, agentType);
+	mind_.init(world, &body_);
 }
 
 void Agent::shutdown() {
-  world_ = nullptr;
+	world_ = nullptr;
 }
 
 void Agent::update(const uint32_t dt) {
-  mind_.update(dt);
-  body_.update(dt);
+	mind_.update(dt);
+	body_.update(dt);
 }
 
 void Agent::render() const {
-  body_.render();
+	body_.render();
 }

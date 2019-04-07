@@ -14,7 +14,7 @@
 
 #define NOMINMAX
 
-#define GAME_NAME "A * Demo"
+#define GAME_NAME "Final Castle"
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 1024
@@ -26,13 +26,11 @@
 #define SHADOW_COLOR {160, 160, 160, 255}
 
 #define FONT_FILE "../media/8bit.ttf"
-#define AGENT_BLUE_PATH "../media/agent_blue.png"
-#define AGENT_RED_PATH "../media/agent_red.png"
-#define AGENT_GREEN_PATH "../media/agent_green.png"
-#define AGENT_PURPLE_PATH "../media/agent_purple.png"
+#define AGENT_WORKER "../media/slave.bmp"
+#define AGENT_SOLDIER "../media/soldier.bmp"
 #define MAP "../media/mapa.bmp"
 #define MAP_COSTES "../media/costes.bmp"
-#define GUARD "../media/guard.bmp"
+#define AGENT_GUARD "../media/guard.bmp"
 
 #define MAX_AGENTS 5
 #define AGENTE_LEADER 5
@@ -73,6 +71,11 @@ inline MathLib::Vec2 rotate2D(const MathLib::Vec2& pivot, const MathLib::Vec2& p
 
 	return MathLib::Vec2(c * (point.x() - pivot.x()) - s * (point.y() - pivot.y()) + pivot.x(),
 		s * (point.x() - pivot.x()) + c * (point.y() - pivot.y()) + pivot.y());
+}
+
+inline int GetRandomInt(int min, int max) {
+	//return (rand() % max + 1); //Desde 1 a Max
+	return ((rand() % (max - min)) + min); //Desde 0 a Max
 }
 
 //random value between two numbers

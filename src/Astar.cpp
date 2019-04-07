@@ -3,8 +3,7 @@
 Astar::Astar(int sourceX, int sourceY, int destinationX, int destinationY) {
 	nodoInicial = Node(sourceX, sourceY, false, true, NULL);
 	nodoDestino = Node(destinationX, destinationY, true, true, NULL);
-	int h;
-	GetHeuristic(nodoInicial, nodoDestino, h);
+	int h = GetHeuristic(nodoInicial, nodoDestino);
 	nodoInicial.Fvalue = h;
 	nodoInicial.Hvalue = h;
 	nodoInicial.Gvalue = 0;
@@ -34,7 +33,7 @@ void Astar::CreatePathFromDestination(Node *nodoDestino, std::vector<Node> lista
 }
 
 
-void Astar::GetGValue(Node nodo, Node nodeAdyacente, int& g) {
+int Astar::GetGValue(Node &nodo, Node nodeAdyacente) {
 	int ActualG = -1;
 	if (((nodeAdyacente.posY > nodo.posY || nodeAdyacente.posY < nodo.posY) && nodeAdyacente.posX == nodo.posX) || //Check Above and below
 		((nodeAdyacente.posX > nodo.posX || nodeAdyacente.posX < nodo.posX) && nodeAdyacente.posY == nodo.posY)) {
@@ -49,11 +48,11 @@ void Astar::GetGValue(Node nodo, Node nodeAdyacente, int& g) {
 		gParent = nodo._parent->Gvalue;
 
 	}
-	g = ActualG + gParent;
+	return ActualG + gParent;
 }
 
-void Astar::GetHeuristic(Node nodo, Node nodeDestino, int& h) {
-	h = abs(nodeDestino.posX - nodo.posX) * HORIZONTAL_COST + abs(nodeDestino.posY - nodo.posY) * VERTICAL_COST; //Manhattan
+int Astar::GetHeuristic(Node nodo, Node nodeDestino) {
+	return abs(nodeDestino.posX - nodo.posX) * HORIZONTAL_COST + abs(nodeDestino.posY - nodo.posY) * VERTICAL_COST; //Manhattan
 }
 
 bool Astar::FoundInList(std::vector<Node> &lista, Node &node) {
@@ -69,8 +68,8 @@ void Astar::FillValuesNode(Node &nodo, Node &nodeAdyacente, Node NodeDestino)
 {
 	int GValue = -1;
 	int HValue = -1;
-	GetGValue(nodo, nodeAdyacente, GValue);
-	GetHeuristic(nodo, NodeDestino, HValue);
+	int g = GetGValue(nodo, nodeAdyacente);
+	int h = GetHeuristic(nodo, NodeDestino);
 	int FValue = GValue + HValue;
 	nodeAdyacente.Fvalue = FValue;
 	nodeAdyacente.Gvalue = GValue;
@@ -130,21 +129,25 @@ void Astar::GetPath() {
 				if (!FoundInList(listaAbierta, nodesAdyacentes[i])) {
 					//nodesAdyacentes[i]._parent = &nodeWithMinorF;
 					nodeWithMinorF._parent = &nodesAdyacentes[i];
-					GetHeuristic(nodesAdyacentes[i], nodoDestino, h);
-					GetGValue(nodeWithMinorF, nodesAdyacentes[i], g);
+					int h = GetHeuristic(nodesAdyacentes[i], nodoDestino);
+					int g = GetGValue(nodeWithMinorF, nodesAdyacentes[i]);
 					nodesAdyacentes[i].Fvalue = g + h;
 					nodesAdyacentes[i].Gvalue = g;
 					nodesAdyacentes[i].Hvalue = h;
 					//FillValuesNode(minorF, nodesAdyacentes[i], nodoDestino);
-					listaAbierta.push_back(nodesAdyacentes[i]); 
+					listaAbierta.push_back(nodesAdyacentes[i]);
 				}
 				else {
 					Node nodoFromList = GetFromList(listaAbierta, nodesAdyacentes[i]);
 					if (nodoFromList.Gvalue < nodeWithMinorF.Gvalue) {
+						RemoveFromList(listaAbierta, nodeWithMinorF);
+
 						nodoFromList._parent = &nodeWithMinorF;
-						GetGValue(nodoFromList, nodeWithMinorF, g);
+						int g = GetGValue(nodoFromList, nodeWithMinorF);
 						nodeWithMinorF.Gvalue = g;
-						nodeWithMinorF.Fvalue = g + h;
+						nodeWithMinorF.Fvalue = g + nodoFromList.Hvalue;
+						listaAbierta.push_back(nodeWithMinorF);
+
 					}
 				}
 			}

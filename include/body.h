@@ -32,18 +32,23 @@ class Agent;
 
 class Body {
 public:
-	enum class Color {
-		Green,
-		Blue,
-		Purple,
-		Red,
-	};
+	//enum class Color {
+	//	Green,
+	//	Blue,
+	//	Purple,
+	//	Red,
+	//};
 
 	enum class Type {
 		Autonomous,
 		Manual,
 	};
 
+	enum class AgentType {
+		Guard,
+		Soldier,
+		Worker
+	};
 	enum class SteeringMode {
 		Kinematic_Seek,         //1       Kinematics
 		Kinematic_Flee,         //2
@@ -68,8 +73,8 @@ public:
 
 	Body() {};
 	~Body() {};
-
-	void init(const Color color, const Type type, Agent* agent);
+	void init(const Type type, Agent* agent, AgentType agentType);
+	//void init(const Color color, const Type type, Agent* agent);
 	void update(const uint32_t dt);
 	void render() const;
 
@@ -78,11 +83,13 @@ public:
 	const KinematicStatus* getKinematic() const { return &state_; }
 	KinematicStatus* getKinematic() { return &state_; }
 	Agent* target_;
+	void setPosition(const MathLib::Vec2& position);
 	void updateSteering(const uint32_t dt, const Steering steering);
 	void updateKinematic(const uint32_t dt, const KinematicSteering steering);
 	void setOrientation(const MathLib::Vec2& velocity);
 	void SetLeader(Agent* leader);
 	void setAgentToFlee(KinematicStatus* AgentToFlee);
+	KinematicStatus state_;
 private:
 	KinematicStatus* _agentToFlee;
 	Agent* _leader;
@@ -92,7 +99,7 @@ private:
 
 	Sprite sprite_;
 	Type type_;
-	Color color_;
+	//Color color_;
 	SteeringMode steering_mode_;
 
 	const float max_speed_ = 100.0f;
@@ -104,7 +111,6 @@ private:
 		} green, red, blue;
 	} dd;
 
-	KinematicStatus state_;
 	KinematicSeek k_seek_;
 	KinematicFlee k_flee_;
 	KinematicArrive k_arrive;

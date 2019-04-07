@@ -1,7 +1,7 @@
-#pragma once
 #ifndef __ASTAR_H__
 #define __ASTAR_H__ 1
 
+#pragma once
 #include <vector>
 #include <defines.h>
 #include <Node.h>
@@ -19,8 +19,8 @@ public:
 	bool loading = false;
 
 private:
-	void GetGValue(Node nodo, Node nodeAdyacente, int& g);
-	void GetHeuristic(Node nodo, Node nodeDestino, int& h);
+	int GetGValue(Node &nodo, Node nodeAdyacente);
+	int GetHeuristic(Node nodo, Node nodeDestino);
 	Node GetFromList(std::vector<Node> &lista, Node node);
 	bool FoundInList(std::vector<Node> &lista, Node &node);
 	void FillValuesNode(Node &nodo, Node &nodeAdyacente, Node NodeDestino);

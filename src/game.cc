@@ -20,6 +20,13 @@ void Game::init() {
 	}
 
 	fps_sprite_.setVisible(false);
+	for (size_t i = 0; i < MAX_AGENTS; i++)
+	{
+
+		soldiers[i].init(&world_, Body::Type::Autonomous, Body::AgentType::Soldier);
+		workers[i].init(&world_, Body::Type::Autonomous, Body::AgentType::Worker);
+		guards[i].init(&world_, Body::Type::Autonomous, Body::AgentType::Guard);
+	}
 
 	world_.target()->getKinematic()->position = MathLib::Vec2(0.0f, 0.0f);
 }
@@ -96,7 +103,6 @@ void Game::handleInput() {
 						destinoY = y;
 						astar = Astar(origenX, origenY, destinoX, destinoY);
 						astar.GetPath();
-						//astar.GetPath(origenX, origenY, destinoX, destinoY);
 						render();
 					}
 
@@ -111,6 +117,8 @@ void Game::handleInput() {
 
 
 void Game::update(const uint32_t dt) {
+	render();
+
 	world_.update(dt / slo_mo_);
 }
 
@@ -123,15 +131,12 @@ void Game::render() {
 	s.loadFromFile(MAP);
 	s.render();
 	world_.render();
-	if (!astar.listaCerrada.empty()) {
-		for (std::vector<Node>::iterator it = astar.listaCerrada.begin(); it != astar.listaCerrada.end(); ++it)
-		{
-			Sprite s;
-			s.loadFromFile(GUARD);
-			s.setPosition(((Node)*it).posX, ((Node)*it).posY);
-			s.render();
-		}
 
+	for (size_t i = 0; i < MAX_AGENTS; i++)
+	{
+		soldiers[i].render();
+		//guards[i].render();
+		workers[i].render();
 	}
 
 	DebugDraw::render();

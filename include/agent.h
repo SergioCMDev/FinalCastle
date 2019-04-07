@@ -16,22 +16,23 @@
 class World;
 
 class Agent {
-  public:
-    Agent() {};
-    ~Agent() {};
+public:
+	Agent() {};
+	~Agent() {};
 
-    void init(World* world, const Body::Color color, const Body::Type type);
-    void update(const uint32_t dt);
-    void render() const;
-    void shutdown();
+	//void init(World* world, const Body::Color color, const Body::Type type);
+	void init(World* world, const Body::Type type, const Body::AgentType agentType);
+	void update(const uint32_t dt);
+	void render() const;
+	void shutdown();
 
 	void setSteering(Body::SteeringMode steering) { body_.setSteering(steering); }
 	void setSteering(Body::SteeringMode steering, Agent* agent) { body_.setSteering(steering); }
-    const KinematicStatus* getKinematic() const { return body_.getKinematic(); }
-    KinematicStatus* getKinematic() { return body_.getKinematic(); }
-    World * world_;
-    Body body_;
-    Mind mind_;
+	const KinematicStatus* getKinematic() const { return body_.getKinematic(); }
+	KinematicStatus* getKinematic() { return body_.getKinematic(); }
+	World * world_;
+	Body body_;
+	Mind mind_;
 	bool leader;
 private:
 };

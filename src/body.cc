@@ -7,25 +7,46 @@
 
 #include <body.h>
 #include <agent.h>
-//#include <defines.h>
 #include <debug_draw.h>
-#include <Steering\Seek.h>
 
 
-void Body::init(const Color color, const Type type, Agent* agent) {
+
+void Body::init(const Type type, Agent* agent, AgentType agentType) {
 	type_ = type;
-	color_ = color;
 	target_ = agent;
-	switch (color) {
-	//case Color::Green: sprite_.loadFromFile(AGENT_GREEN_PATH); break;
-	//case Color::Blue: sprite_.loadFromFile(AGENT_BLUE_PATH); break;
-	//case Color::Purple: sprite_.loadFromFile(AGENT_PURPLE_PATH); break;
-	//case Color::Red: sprite_.loadFromFile(AGENT_RED_PATH); break;
-	//default: sprite_.loadFromFile(AGENT_GREEN_PATH);
-	}
 
+	switch (agentType) {
+	case AgentType::Guard: {
+		//sprite_.loadFromFile(AGENT_GUARD);
+		int randomValueX = rand();
+		int randomValueY = rand();
+		//getKinematic()->position = MathLib::Vec2(0, 0);
+		break; }
+	case AgentType::Soldier: {
+		sprite_.loadFromFile(AGENT_SOLDIER);
+		int x = GetRandomInt(1, 10);
+		if (x % 2 == 0) {
+			setPosition(MathLib::Vec2(849, 985));
+		}
+		else {
+			setPosition(MathLib::Vec2(971, 850));
+		}
+		break; }
+	case AgentType::Worker: {
+		sprite_.loadFromFile(AGENT_WORKER);
+		int x = GetRandomInt(50, 80);
+		int y = GetRandomInt(490, 890);
+		setPosition(MathLib::Vec2(x, y));
+		break; }
+
+	}
 	steering_mode_ = SteeringMode::Kinematic_Seek;
 }
+void Body::setPosition(const MathLib::Vec2& position) {
+	this->getKinematic()->position = position;
+	sprite_.setPosition(position.x(), position.y());
+}
+
 
 void Body::update(const uint32_t dt) {
 	if (type_ == Type::Autonomous) {
@@ -34,7 +55,7 @@ void Body::update(const uint32_t dt) {
 		case SteeringMode::Kinematic_Seek: {
 			KinematicSteering steer;
 			k_seek_.calculate(state_, target_->getKinematic(), &steer);
-			updateKinematic(dt, steer);
+			//updateKinematic(dt, steer);
 			setOrientation(state_.velocity);
 			break;
 		}

@@ -24,7 +24,6 @@ class Game {
     void init();
     void start();
     void shutdown();
-	//std::vector<Node> listaCerrada;
 	Astar astar;
 
   private:
@@ -38,6 +37,10 @@ class Game {
     World world_;
 
     int8_t slo_mo_ = 1;
+
+	Agent soldiers[MAX_AGENTS];
+	Agent workers[MAX_AGENTS];
+	Agent guards[MAX_AGENTS];
 };
 
 #endif
