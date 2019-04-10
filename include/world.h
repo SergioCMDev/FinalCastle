@@ -58,19 +58,19 @@ public:
 	void render() {
 		Sprite s;
 		s.loadFromFile(MAP);
-		target_.render();
-		for (int i = 0; i < MAX_AGENTS; i++) {
+		//target_.render();
+		/*for (int i = 0; i < MAX_AGENTS; i++) {
 			ia_[i].render();
-		}
+		}*/
 	}
-	static Agent* GetIAs() {
-		return new Agent();
-	}
-	Agent* target() { return &target_; }
-	Agent* ia(int i) { return &ia_[i]; }
+	//static Agent* GetIAs() {
+	//	return new Agent();
+	//}
+	//Agent* target() { return &target_; }
+	//Agent* ia(int i) { return &ia_[i]; }
 
-	Agent* agentLeader;
-	Agent target_, ia_[MAX_AGENTS];
+	//Agent* agentLeader;
+	//Agent target_;
 private:
 };
 

@@ -10,23 +10,28 @@
 
 #include <cstdint>
 #include <defines.h>
+//#include <agent.h>
 
 class Body;
 class World;
+//class Agent;
+
 
 class Mind {
   public:
     Mind() {};
     ~Mind() {};
 
-    void init(World* world, Body* body);
+	//void init(World* world, Body* body, Agent::Type agentType);
+	void init(World* world, Body* body);
     void update(const uint32_t dt);
-	void SearchNearbyAgents();
+	//void SearchNearbyAgents();
     World* world_;
-	KinematicStatus AgentToFlee;
-	void CheckBoundaries();
+	//KinematicStatus AgentToFlee;
+	//void CheckBoundaries();
   private:
     Body* body_;
+	//Agent::Type agentType_;
 };
 
 #endif

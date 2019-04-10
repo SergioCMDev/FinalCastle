@@ -7,6 +7,7 @@
 
 #include <game.h>
 #include <window.h>
+#include <body.h>
 #include <defines.h>
 #include <debug_draw.h>
 
@@ -23,12 +24,15 @@ void Game::init() {
 	for (size_t i = 0; i < MAX_AGENTS; i++)
 	{
 
-		soldiers[i].init(&world_, Body::Type::Autonomous, Body::AgentType::Soldier);
-		workers[i].init(&world_, Body::Type::Autonomous, Body::AgentType::Worker);
-		guards[i].init(&world_, Body::Type::Autonomous, Body::AgentType::Guard);
+		soldiers[i].init(&world_, Body::Type::Autonomous);
+		workers[i].init(&world_, Body::Type::Autonomous);
+		guards[i].init(&world_, Body::Type::Autonomous);
+		//soldiers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Soldier);
+		//workers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Worker);
+		//guards[i].init(&world_, Body::Type::Autonomous, Agent::Type::Guard);
 	}
 
-	world_.target()->getKinematic()->position = MathLib::Vec2(0.0f, 0.0f);
+	//world_.target()->getKinematic()->position = MathLib::Vec2(0.0f, 0.0f);
 }
 
 void Game::start() {
@@ -46,12 +50,12 @@ void Game::start() {
 		while ((SDL_GetTicks() > next_game_tick) && (loops < MAX_FRAME_SKIP)) {
 			handleInput();
 			update(skip_ticks);
+			updateAgents();
 
 			next_game_tick += skip_ticks;
 			++loops;
 			++update_loops;
 		}
-
 		render();
 
 		uint32_t c_time = SDL_GetTicks();
@@ -70,6 +74,16 @@ void Game::start() {
 			update_loops = 0;
 			fps_time_acc = 0;
 		}
+	}
+}
+
+
+void Game::updateAgents() {
+	for (size_t i = 0; i < MAX_AGENTS; i++)
+	{
+		//soldiers[i].update();
+		//guards[i].render();
+		//workers[i].render();
 	}
 }
 
@@ -135,7 +149,7 @@ void Game::render() {
 	for (size_t i = 0; i < MAX_AGENTS; i++)
 	{
 		soldiers[i].render();
-		//guards[i].render();
+		guards[i].render();
 		workers[i].render();
 	}
 

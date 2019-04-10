@@ -6,12 +6,16 @@
 //----------------------------------------------------------------------------
 
 #include <agent.h>
-#include <world.h>
 
-void Agent::init(World* world, const Body::Type type, const Body::AgentType agentType) {
+
+
+//void Agent::init(World* world, const Body::Type type, const Agent::Type agentType) {
+	void Agent::init(World* world, const Body::Type type) {
 	world_ = world;
-	body_.init(type, this, agentType);
-	mind_.init(world, &body_);
+	//body_.init(type, this, agentType);
+	//mind_.init(world, &body_, agentType);
+	body_.init(type, this);
+	//mind_.init(world, &body_);
 }
 
 void Agent::shutdown() {
@@ -19,7 +23,7 @@ void Agent::shutdown() {
 }
 
 void Agent::update(const uint32_t dt) {
-	mind_.update(dt);
+	//mind_.update(dt);
 	body_.update(dt);
 }
 

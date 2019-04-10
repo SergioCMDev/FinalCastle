@@ -8,20 +8,25 @@
 #ifndef __AGENT_H__
 #define __AGENT_H__ 1
 
-#include <body.h>
 #include <mind.h>
+#include <body.h>
 
 #include <cstdint>
-
 class World;
+class Mind;
 
 class Agent {
 public:
+	enum class Type {
+		Guard,
+		Soldier,
+		Worker
+	};
 	Agent() {};
 	~Agent() {};
 
-	//void init(World* world, const Body::Color color, const Body::Type type);
-	void init(World* world, const Body::Type type, const Body::AgentType agentType);
+	//void init(World* world, const Body::Type type, const Type agentType);
+	void init(World* world, const Body::Type type);
 	void update(const uint32_t dt);
 	void render() const;
 	void shutdown();
@@ -33,7 +38,6 @@ public:
 	World * world_;
 	Body body_;
 	Mind mind_;
-	bool leader;
 private:
 };
 

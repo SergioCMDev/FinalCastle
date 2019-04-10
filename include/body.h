@@ -10,6 +10,7 @@
 
 #include <sprite.h>
 #include <defines.h>
+//#include <agent.h>
 #include <mathlib/vec2.h>
 #include<Kinematics/KinematicArrive.h>
 #include<Kinematics/KinematicFlee.h>
@@ -32,23 +33,12 @@ class Agent;
 
 class Body {
 public:
-	//enum class Color {
-	//	Green,
-	//	Blue,
-	//	Purple,
-	//	Red,
-	//};
-
 	enum class Type {
 		Autonomous,
 		Manual,
 	};
 
-	enum class AgentType {
-		Guard,
-		Soldier,
-		Worker
-	};
+
 	enum class SteeringMode {
 		Kinematic_Seek,         //1       Kinematics
 		Kinematic_Flee,         //2
@@ -73,7 +63,8 @@ public:
 
 	Body() {};
 	~Body() {};
-	void init(const Type type, Agent* agent, AgentType agentType);
+	//void init(const Type type, Agent* agent, Agent::Type agentType);
+	void init(const Type type, Agent* agent);
 	//void init(const Color color, const Type type, Agent* agent);
 	void update(const uint32_t dt);
 	void render() const;

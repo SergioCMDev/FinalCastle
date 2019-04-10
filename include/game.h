@@ -29,6 +29,7 @@ class Game {
   private:
     void handleInput();
     void update(const uint32_t dt);
+	void updateAgents();
     void render();
 	int origenX = -1, origenY = -1, destinoX = -1, destinoY = -1;
     bool quit_ = false;
