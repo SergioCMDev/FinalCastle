@@ -9,8 +9,8 @@
 
 
 
-//void Agent::init(World* world, const Body::Type type, const Agent::Type agentType) {
-	void Agent::init(World* world, const Body::Type type) {
+void Agent::init(World* world, const Body::Type type, const Agent::Type agentType) {
+	//void Agent::init(World* world, const Body::Type type) {
 	world_ = world;
 	//body_.init(type, this, agentType);
 	//mind_.init(world, &body_, agentType);

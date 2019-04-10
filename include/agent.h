@@ -25,8 +25,8 @@ public:
 	Agent() {};
 	~Agent() {};
 
-	//void init(World* world, const Body::Type type, const Type agentType);
-	void init(World* world, const Body::Type type);
+	void init(World* world, const Body::Type type, const Type agentType);
+	//void init(World* world, const Body::Type type);
 	void update(const uint32_t dt);
 	void render() const;
 	void shutdown();
