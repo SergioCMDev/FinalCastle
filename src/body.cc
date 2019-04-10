@@ -43,7 +43,7 @@ void Body::init(const Type type, Agent* agent) {
 		break; }
 
 	}
-	steering_mode_ = SteeringMode::Kinematic_Seek;
+	//steering_mode_ = SteeringMode::Kinematic_Seek;
 }
 void Body::setPosition(const MathLib::Vec2& position) {
 	this->getKinematic()->position = position;

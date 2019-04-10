@@ -20,58 +20,47 @@ using MathLib::Vec2;
 class World {
 public:
 	World() {
-		/*for (int i = 0; i < MAX_AGENTS; i++) {
-
-			ia_[i].leader = false;
-			if (i == AGENTE_LEADER) {
-				ia_[i].init(this, Body::Color::Purple, Body::Type::Autonomous);
-			}
-			else {
-				ia_[i].init(this, Body::Color::Green, Body::Type::Autonomous);
-			}
-
-			ia_[i].getKinematic()->position = Vec2(WINDOW_WIDTH / (i + 1), WINDOW_HEIGHT / (i + 1));
+		for (size_t i = 0; i < MAX_AGENTS; i++)
+		{
+			soldiers[i].init(this, Body::Type::Autonomous, Agent::Type::Soldier);
+			workers[i].init(this, Body::Type::Autonomous, Agent::Type::Worker);
+			guards[i].init(this, Body::Type::Autonomous, Agent::Type::Guard);
 		}
 
-		agentLeader = &ia_[AGENTE_LEADER];
-		for (int i = 0; i < MAX_AGENTS; i++) {
-			ia_[i].body_.SetLeader(&ia_[AGENTE_LEADER]);
-
-		}*/
-		//ia_[AGENTE_LEADER].leader = true;
-		//target_.init(this, Body::Color::Red, Body::Type::Manual);
 	};
 	~World() {
-		//target_.shutdown();
-		//for (int i = 0; i < MAX_AGENTS; i++) {
+		for (int i = 0; i < MAX_AGENTS; i++) {
 
-		//	ia_[i].shutdown();
-		//}
-	};
+			soldiers[i].shutdown();
+			workers[i].shutdown();
+			guards[i].shutdown();
+		}
+	}
+
 
 	void update(const float dt) {
-		/*target_.update(dt);
 		for (int i = 0; i < MAX_AGENTS; i++) {
-			ia_[i].update(dt);
-		}*/
+
+			soldiers[i].update(dt);
+			workers[i].update(dt);
+			guards[i].update(dt);
+		}
 	}
 	void render() {
 		Sprite s;
 		s.loadFromFile(MAP);
-		//target_.render();
-		/*for (int i = 0; i < MAX_AGENTS; i++) {
-			ia_[i].render();
-		}*/
+		s.render();
+		for (size_t i = 0; i < MAX_AGENTS; i++)
+		{
+			soldiers[i].render();
+			guards[i].render();
+			workers[i].render();
+		}
 	}
-	//static Agent* GetIAs() {
-	//	return new Agent();
-	//}
-	//Agent* target() { return &target_; }
-	//Agent* ia(int i) { return &ia_[i]; }
-
-	//Agent* agentLeader;
-	//Agent target_;
 private:
+	Agent soldiers[MAX_AGENTS];
+	Agent workers[MAX_AGENTS];
+	Agent guards[MAX_AGENTS];
 };
 
 #endif

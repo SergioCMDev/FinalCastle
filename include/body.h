@@ -75,8 +75,6 @@ public:
 	void updateSteering(const uint32_t dt, const Steering steering);
 	void updateKinematic(const uint32_t dt, const KinematicSteering steering);
 	void setOrientation(const MathLib::Vec2& velocity);
-	void SetLeader(Agent* leader);
-	void setAgentToFlee(KinematicStatus* AgentToFlee);
 	KinematicStatus state_;
 private:
 	KinematicStatus* _agentToFlee;

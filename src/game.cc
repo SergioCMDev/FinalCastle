@@ -21,12 +21,12 @@ void Game::init() {
 	}
 
 	fps_sprite_.setVisible(false);
-	for (size_t i = 0; i < MAX_AGENTS; i++)
-	{
-		soldiers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Soldier);
-		workers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Worker);
-		guards[i].init(&world_, Body::Type::Autonomous, Agent::Type::Guard);
-	}
+	//for (size_t i = 0; i < MAX_AGENTS; i++)
+	//{
+	//	soldiers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Soldier);
+	//	workers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Worker);
+	//	guards[i].init(&world_, Body::Type::Autonomous, Agent::Type::Guard);
+	//}
 	//world_.target()->getKinematic()->position = MathLib::Vec2(0.0f, 0.0f);
 }
 
@@ -45,7 +45,6 @@ void Game::start() {
 		while ((SDL_GetTicks() > next_game_tick) && (loops < MAX_FRAME_SKIP)) {
 			handleInput();
 			update(skip_ticks);
-			updateAgents();
 
 			next_game_tick += skip_ticks;
 			++loops;
@@ -73,14 +72,7 @@ void Game::start() {
 }
 
 
-void Game::updateAgents() {
-	for (size_t i = 0; i < MAX_AGENTS; i++)
-	{
-		//soldiers[i].update();
-		//guards[i].render();
-		//workers[i].render();
-	}
-}
+
 
 void Game::shutdown() {}
 
@@ -141,12 +133,7 @@ void Game::render() {
 	s.render();
 	world_.render();
 
-	for (size_t i = 0; i < MAX_AGENTS; i++)
-	{
-		soldiers[i].render();
-		guards[i].render();
-		workers[i].render();
-	}
+
 
 	DebugDraw::render();
 
