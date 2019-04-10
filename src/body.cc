@@ -16,33 +16,33 @@ void Body::init(const Type type, Agent* agent) {
 	type_ = type;
 	target_ = agent;
 
-	//switch (agentType) {
-	//case Agent::Type::Guard: {
-	//	sprite_.loadFromFile(AGENT_GUARD);
-	//	int randomValueX = rand();
-	//	int randomValueY = rand();
-	//	setPosition(MathLib::Vec2(229, 393));
+	switch (agent->type_) {
+	case Agent::Type::Guard: {
+		sprite_.loadFromFile(AGENT_GUARD);
+		int randomValueX = rand();
+		int randomValueY = rand();
+		setPosition(MathLib::Vec2(229, 393));
 
-	//	//getKinematic()->position = MathLib::Vec2(0, 0);
-	//	break; }
-	//case Agent::Type::Soldier: {
-	//	sprite_.loadFromFile(AGENT_SOLDIER);
-	//	int x = GetRandomInt(1, 10);
-	//	if (x % 2 == 0) {
-	//		setPosition(MathLib::Vec2(849, 985));
-	//	}
-	//	else {
-	//		setPosition(MathLib::Vec2(971, 850));
-	//	}
-	//	break; }
-	//case Agent::Type::Worker: {
-	//	sprite_.loadFromFile(AGENT_WORKER);
-	//	int x = GetRandomInt(50, 80);
-	//	int y = GetRandomInt(490, 890);
-	//	setPosition(MathLib::Vec2(x, y));
-	//	break; }
+		//getKinematic()->position = MathLib::Vec2(0, 0);
+		break; }
+	case Agent::Type::Soldier: {
+		sprite_.loadFromFile(AGENT_SOLDIER);
+		int x = GetRandomInt(1, 10);
+		if (x % 2 == 0) {
+			setPosition(MathLib::Vec2(849, 985));
+		}
+		else {
+			setPosition(MathLib::Vec2(971, 850));
+		}
+		break; }
+	case Agent::Type::Worker: {
+		sprite_.loadFromFile(AGENT_WORKER);
+		int x = GetRandomInt(50, 80);
+		int y = GetRandomInt(490, 890);
+		setPosition(MathLib::Vec2(x, y));
+		break; }
 
-	//}
+	}
 	steering_mode_ = SteeringMode::Kinematic_Seek;
 }
 void Body::setPosition(const MathLib::Vec2& position) {
@@ -164,9 +164,7 @@ void Body::update(const uint32_t dt) {
 			setOrientation(state_.velocity);
 
 			break;		}
-									   /*
-   if my pos is > radious + leader pos-> seek leader
-   */
+
 		}
 	}
 	else {
@@ -177,14 +175,14 @@ void Body::update(const uint32_t dt) {
 	sprite_.setRotation(state_.orientation);
 }
 
-void Body::SetLeader(Agent* leader) {
-	_leader = leader;
-}
-
-void Body::setAgentToFlee(KinematicStatus* AgentToFlee)
-{
-	_agentToFlee = AgentToFlee;
-}
+//void Body::SetLeader(Agent* leader) {
+//	_leader = leader;
+//}
+//
+//void Body::setAgentToFlee(KinematicStatus* AgentToFlee)
+//{
+//	_agentToFlee = AgentToFlee;
+//}
 
 
 void Body::updateKinematic(const uint32_t dt, const KinematicSteering steering) {

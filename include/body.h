@@ -10,7 +10,6 @@
 
 #include <sprite.h>
 #include <defines.h>
-//#include <agent.h>
 #include <mathlib/vec2.h>
 #include<Kinematics/KinematicArrive.h>
 #include<Kinematics/KinematicFlee.h>
@@ -63,9 +62,7 @@ public:
 
 	Body() {};
 	~Body() {};
-	//void init(const Type type, Agent* agent, Agent::Type agentType);
 	void init(const Type type, Agent* agent);
-	//void init(const Color color, const Type type, Agent* agent);
 	void update(const uint32_t dt);
 	void render() const;
 
@@ -90,7 +87,6 @@ private:
 
 	Sprite sprite_;
 	Type type_;
-	//Color color_;
 	SteeringMode steering_mode_;
 
 	const float max_speed_ = 100.0f;

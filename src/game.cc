@@ -23,15 +23,10 @@ void Game::init() {
 	fps_sprite_.setVisible(false);
 	for (size_t i = 0; i < MAX_AGENTS; i++)
 	{
-
-		//soldiers[i].init(&world_, Body::Type::Autonomous);
-		//workers[i].init(&world_, Body::Type::Autonomous);
-		//guards[i].init(&world_, Body::Type::Autonomous);
 		soldiers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Soldier);
 		workers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Worker);
 		guards[i].init(&world_, Body::Type::Autonomous, Agent::Type::Guard);
 	}
-
 	//world_.target()->getKinematic()->position = MathLib::Vec2(0.0f, 0.0f);
 }
 

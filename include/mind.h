@@ -14,24 +14,19 @@
 
 class Body;
 class World;
-//class Agent;
+class Agent;
 
 
 class Mind {
-  public:
-    Mind() {};
-    ~Mind() {};
-
-	//void init(World* world, Body* body, Agent::Type agentType);
-	void init(World* world, Body* body);
-    void update(const uint32_t dt);
-	//void SearchNearbyAgents();
-    World* world_;
-	//KinematicStatus AgentToFlee;
-	//void CheckBoundaries();
-  private:
-    Body* body_;
-	//Agent::Type agentType_;
+public:
+	Mind() {};
+	~Mind() {};
+	void init(World* world, Body* body, Agent* type);
+	void update(const uint32_t dt);
+	World* world_;
+private:
+	Body* body_;
+	Agent* agent_;
 };
 
 #endif
