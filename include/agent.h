@@ -38,6 +38,7 @@ public:
 	World * world_;
 	Body body_;
 	Mind mind_;
+	Type type_;
 private:
 };
 
