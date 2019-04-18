@@ -12,7 +12,6 @@
 
 
 void Body::init(const Type type, Agent* agent) {
-	//void Body::init(const Type type, Agent* agent, Agent::Type agentType) {
 	type_ = type;
 	target_ = agent;
 
@@ -174,16 +173,6 @@ void Body::update(const uint32_t dt) {
 	sprite_.setPosition(state_.position.x(), state_.position.y());
 	sprite_.setRotation(state_.orientation);
 }
-
-//void Body::SetLeader(Agent* leader) {
-//	_leader = leader;
-//}
-//
-//void Body::setAgentToFlee(KinematicStatus* AgentToFlee)
-//{
-//	_agentToFlee = AgentToFlee;
-//}
-
 
 void Body::updateKinematic(const uint32_t dt, const KinematicSteering steering) {
 	float time = dt * 0.001f;

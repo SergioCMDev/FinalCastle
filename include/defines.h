@@ -28,15 +28,14 @@
 #define FONT_FILE "../media/8bit.ttf"
 #define AGENT_WORKER "../media/slave.bmp"
 #define AGENT_SOLDIER "../media/soldier.bmp"
+#define AGENT_GUARD "../media/guard.bmp"
 #define MAP "../media/mapa.bmp"
 #define MAP_COSTES "../media/costes.bmp"
-#define AGENT_GUARD "../media/guard.bmp"
 
-#define MAX_AGENTS 5
-#define AGENTE_LEADER 5
+#define MAX_AGENTS 1
 #define FPS_FONT_SIZE 12
-#define MAX_DISTANCE_COHESION 12
-#define MAX_DISTANCE_SEPARATION 12
+
+const MathLib::Vec2 ENTRADA_ZONA_DESCANSO(144, 468);
 
 const int HORIZONTAL_COST = 1;
 const int VERTICAL_COST = 2;
@@ -94,6 +93,10 @@ inline float wrapAnglePI(double x) {
 //returns (-1, 0 , 1), the sign of the number
 template <typename T> int sign(T val) {
 	return (T(0) < val) - (val < T(0));
+}
+
+inline bool DifferentPositions(const MathLib::Vec2 pos1, const MathLib::Vec2 pos2 ) {
+	return pos1.x() != pos2.x() || pos1.y() != pos2.y();
 }
 
 #endif

@@ -14,7 +14,7 @@ public:
 		const MathLib::Vec2 directionToLeader = leader->position - character1->position;
 		const float distance = directionToLeader.length();
 
-		if (distance > MathLib::Vec2(MAX_DISTANCE_COHESION, MAX_DISTANCE_COHESION).length()) {
+		/*if (distance > MathLib::Vec2(MAX_DISTANCE_COHESION, MAX_DISTANCE_COHESION).length()) {
 			const MathLib::Vec2 targetVelocity = directionToLeader.normalized() * max_speed;
 			steering->linear = (targetVelocity - character1->velocity) + MathLib::Vec2(MAX_DISTANCE_COHESION, MAX_DISTANCE_COHESION) / time_to_taget;
 
@@ -22,7 +22,7 @@ public:
 			if (steering->linear.length() > max_acceleration_) {
 				steering->linear = steering->linear.normalized() * max_acceleration_;
 			}
-		}
+		}*/
 
 
 		steering->angular = 0.0f; //no angular

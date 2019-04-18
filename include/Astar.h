@@ -12,11 +12,13 @@ class Astar
 {
 public:
 	Astar();
-	Astar(int sourceX, int sourceY, int destinationX, int destinationY);
 	~Astar();
 	void GetPath();
+	void SetValues(int sourceX, int sourceY, int destinationX, int destinationY);
+	void SetValues(MathLib::Vec2 posOrigen, MathLib::Vec2 posDestino);
 	std::vector<Node> listaCerrada;
 	bool loading = false;
+	Node nodoDestino;
 
 private:
 	int GetGValue(Node &nodo, Node nodeAdyacente);
@@ -30,7 +32,6 @@ private:
 	std::vector<Node> listaAbierta;
 	Node nodesAdyacentes[8];
 	Node nodoInicial;
-	Node nodoDestino;
 	std::vector<Node> camino;
 	Read_Map map;
 	int indiceListaAbierta = 0;

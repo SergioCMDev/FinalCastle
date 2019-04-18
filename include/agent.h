@@ -38,6 +38,7 @@ public:
 	Body body_;
 	Mind mind_;
 	Type type_;
+	bool working = false;
 private:
 };
 

@@ -102,7 +102,8 @@ void Game::handleInput() {
 					else {
 						destinoX = x;
 						destinoY = y;
-						astar = Astar(origenX, origenY, destinoX, destinoY);
+						astar = Astar();
+						astar.SetValues(origenX, origenY, destinoX, destinoY);
 						astar.GetPath();
 						render();
 					}

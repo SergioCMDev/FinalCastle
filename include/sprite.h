@@ -9,6 +9,7 @@
 #define __SPRITE_H__ 1
 
 #include <texture.h>
+#include <defines.h>
 
 class Sprite : public Texture {
 public:
@@ -17,6 +18,7 @@ public:
 
   void setPositionUpLeft(const uint32_t x, const uint32_t y);
   void setPosition(const uint32_t x, const uint32_t y);
+  void setPosition(MathLib::Vec2 position);
   void setRotation(const float angle);
   void setVisible(const bool visible = true);
   void render() const;

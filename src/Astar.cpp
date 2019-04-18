@@ -1,6 +1,19 @@
 #include "Astar.h"
 
-Astar::Astar(int sourceX, int sourceY, int destinationX, int destinationY) {
+Astar::Astar() {
+	map.loadMap();
+}
+
+Astar::~Astar()
+{
+}
+
+void Astar::SetValues(MathLib::Vec2 posOrigen, MathLib::Vec2 posDestino) {
+	SetValues(posOrigen.x(), posOrigen.y(), posDestino.x(), posDestino.y());
+}
+
+
+void Astar::SetValues(int sourceX, int sourceY, int destinationX, int destinationY) {
 	nodoInicial = Node(sourceX, sourceY, false, true, NULL);
 	nodoDestino = Node(destinationX, destinationY, true, true, NULL);
 	int h = GetHeuristic(nodoInicial, nodoDestino);
@@ -11,15 +24,6 @@ Astar::Astar(int sourceX, int sourceY, int destinationX, int destinationY) {
 	nodoDestino.Fvalue = 0;
 	nodoDestino.Gvalue = 0;
 	nodoDestino.Hvalue = 0;
-	map.loadMap();
-}
-
-Astar::~Astar()
-{
-}
-
-Astar::Astar() {
-
 }
 
 

@@ -20,6 +20,10 @@ void Sprite::setPositionUpLeft(const uint32_t x, const uint32_t y) {
   position_.y = y;
 }
 
+void Sprite::setPosition(MathLib::Vec2 position) {
+	Sprite::setPosition(position.x(), position.y());
+}
+
 void Sprite::setPosition(const uint32_t x, const uint32_t y) {
   position_.x = x - (getWidth() / 2);
   position_.y = y - (getHeight() / 2);

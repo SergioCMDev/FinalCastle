@@ -26,6 +26,11 @@ Node::Node(int F, int G, int H, bool destino, bool transitable, Node* parent)
 	_parent = parent;
 }
 
+MathLib::Vec2 Node::GetPosition()
+{
+	return MathLib::Vec2(posX, posY);
+}
+
 
 Node::~Node()
 {
