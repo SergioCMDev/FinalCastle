@@ -162,3 +162,23 @@ void Astar::GetPath() {
 	//CreatePathFromDestination(&nodoDestino, camino);
 	loading = !loading;
 }
+
+MathLib::Vec2 Astar::GetNextPosition(Node &inicio)
+{
+	MathLib::Vec2 newPosition;
+	for (std::vector<Node>::iterator it = listaCerrada.begin(); it != listaCerrada.end(); ++it)
+	{
+		if (DifferentPositions(inicio.GetPosition(), nodoDestino.GetPosition())) {
+			std::vector<Node>::iterator it = std::find(listaCerrada.begin(), listaCerrada.end(), inicio);
+			if (it != listaCerrada.end()) {
+
+				auto nx = std::next(it, 1);
+				inicio = ((Node)*nx);
+				newPosition = ((Node)*nx).GetPosition();
+				break;
+			}
+
+		}
+	}
+	return newPosition;
+}

@@ -41,7 +41,7 @@ void Mind::update(const uint32_t dt) {
 				MathLib::Vec2 finalPosition = astar.nodoDestino.GetPosition();
 				Node inicio = Node(actualPosition.x(), actualPosition.y(), false, false, NULL);
 
-				MathLib::Vec2 newPosition =	GetNextPosition(inicio, finalPosition);
+				MathLib::Vec2 newPosition =	astar.GetNextPosition(inicio);
 				MathLib::Vec2 offset = (newPosition - actualPosition);
 				body_->setPosition(actualPosition + MathLib::Vec2(offset.x(), offset.y()));
 			}
@@ -56,24 +56,6 @@ void Mind::update(const uint32_t dt) {
 	};
 }
 
-MathLib::Vec2 Mind::GetNextPosition(Node &inicio, MathLib::Vec2 &finalPosition)
-{
-	MathLib::Vec2 newPosition;
-	for (std::vector<Node>::iterator it = astar.listaCerrada.begin(); it != astar.listaCerrada.end(); ++it)
-	{
-		if (DifferentPositions(inicio.GetPosition(), finalPosition)) {
-			std::vector<Node>::iterator it = std::find(astar.listaCerrada.begin(), astar.listaCerrada.end(), inicio);
-			if (it != astar.listaCerrada.end()) {
 
-				auto nx = std::next(it, 1);
-				inicio = ((Node)*nx);
-				newPosition = ((Node)*nx).GetPosition();
-				break;
-			}
-
-		}
-	}
-	return newPosition;
-}
 
 

@@ -19,6 +19,7 @@ public:
 	std::vector<Node> listaCerrada;
 	bool loading = false;
 	Node nodoDestino;
+	MathLib::Vec2 GetNextPosition(Node &inicio);
 
 private:
 	int GetGValue(Node &nodo, Node nodeAdyacente);
