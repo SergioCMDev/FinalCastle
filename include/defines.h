@@ -32,7 +32,7 @@
 #define MAP "../media/mapa.bmp"
 #define MAP_COSTES "../media/costes.bmp"
 
-#define MAX_AGENTS 1
+#define MAX_AGENTS 5
 #define FPS_FONT_SIZE 12
 
 const MathLib::Vec2 ENTRADA_ZONA_DESCANSO(144, 468);
