@@ -23,7 +23,6 @@ public:
 	~Mind() {};
 	void init(World* world, Body* body, Agent* type);
 	void update(const uint32_t dt);
-	//void GetNextPosition(Node &inicio, MathLib::Vec2 &finalPosition, MathLib::Vec2 &newPosition);
 	World* world_;
 private:
 	Body* body_;
