@@ -20,6 +20,8 @@ public:
 	bool loading = false;
 	Node nodoDestino;
 	MathLib::Vec2 GetNextPosition(Node &inicio);
+	std::vector<Node> GetCamino();
+
 
 private:
 	int GetGValue(Node &nodo, Node nodeAdyacente);
@@ -28,8 +30,7 @@ private:
 	bool FoundInList(std::vector<Node> &lista, Node &node);
 	void FillValuesNode(Node &nodo, Node &nodeAdyacente, Node NodeDestino);
 	void GetAdyacentes(Node nodo);
-	void GetMinorFNode(std::vector<Node> &listaAbierta, int &FMinor, Node &minorF);
-	void CreatePathFromDestination(Node *nodoDestino, std::vector<Node> lista);
+	Node GetMinorFNode(std::vector<Node> listaAbierta);
 	std::vector<Node> listaAbierta;
 	Node nodesAdyacentes[8];
 	Node nodoInicial;

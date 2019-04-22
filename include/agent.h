@@ -22,6 +22,19 @@ public:
 		Soldier,
 		Worker
 	};
+
+	enum class Status {
+		Relax, //Worker
+		TimeToWork, //Worker
+		Working, //Worker
+		RunningAway, //Worker
+		Free, //Worker
+		Captured, //Worker
+		Observing, //Guard
+		Suspecting, //Guard
+		Alarm,//Guard
+		Searching //Soldier
+	};
 	Agent() {};
 	~Agent() {};
 
@@ -39,7 +52,8 @@ public:
 	Mind mind_;
 	Type type_;
 	bool working = false;
-private:
+	Status status_;
+	private:
 };
 
 #endif

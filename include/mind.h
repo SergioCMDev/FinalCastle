@@ -29,6 +29,7 @@ private:
 	Body* body_;
 	Agent* agent_;
 	Astar astar;
+	bool getNewPath = true;
 
 };
 

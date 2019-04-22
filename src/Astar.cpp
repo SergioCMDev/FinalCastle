@@ -14,8 +14,8 @@ void Astar::SetValues(MathLib::Vec2 posOrigen, MathLib::Vec2 posDestino) {
 
 
 void Astar::SetValues(int sourceX, int sourceY, int destinationX, int destinationY) {
-	nodoInicial = Node(sourceX, sourceY, false, true, NULL);
-	nodoDestino = Node(destinationX, destinationY, true, true, NULL);
+	nodoInicial = Node(sourceX, sourceY, false, true);
+	nodoDestino = Node(destinationX, destinationY, true, true);
 	int h = GetHeuristic(nodoInicial, nodoDestino);
 	nodoInicial.Fvalue = h;
 	nodoInicial.Hvalue = h;
@@ -24,16 +24,6 @@ void Astar::SetValues(int sourceX, int sourceY, int destinationX, int destinatio
 	nodoDestino.Fvalue = 0;
 	nodoDestino.Gvalue = 0;
 	nodoDestino.Hvalue = 0;
-}
-
-
-void Astar::CreatePathFromDestination(Node *nodoDestino, std::vector<Node> lista) {
-	/*Node* node = nodoDestino->_parent;
-	do {
-		lista.push_back(*node);
-		node = node->_parent;
-	} while (node->_parent != NULL);*/
-
 }
 
 
@@ -82,28 +72,31 @@ void Astar::FillValuesNode(Node &nodo, Node &nodeAdyacente, Node NodeDestino)
 
 
 void Astar::GetAdyacentes(Node nodo) {
-	nodesAdyacentes[0] = Node(nodo.posX + 0, nodo.posY + 1, false, map.map_l1[(nodo.posX + 0) / 8][(nodo.posY + 1) / 8] == 0, NULL);
-	nodesAdyacentes[1] = Node(nodo.posX + 1, nodo.posY + 1, false, map.map_l1[(nodo.posX + 1) / 8][(nodo.posY + 1) / 8] == 0, NULL);
-	nodesAdyacentes[2] = Node(nodo.posX + 1, nodo.posY + 0, false, map.map_l1[(nodo.posX + 1) / 8][(nodo.posY + 0) / 8] == 0, NULL);
-	nodesAdyacentes[3] = Node(nodo.posX + 1, nodo.posY - 1, false, map.map_l1[(nodo.posX + 1) / 8][(nodo.posY - 1) / 8] == 0, NULL);
+	nodesAdyacentes[0] = Node(nodo.posX + 0, nodo.posY + 1, false, map.map_l1[(nodo.posX + 0) / 8][(nodo.posY + 1) / 8] == 0);
+	nodesAdyacentes[1] = Node(nodo.posX + 1, nodo.posY + 1, false, map.map_l1[(nodo.posX + 1) / 8][(nodo.posY + 1) / 8] == 0);
+	nodesAdyacentes[2] = Node(nodo.posX + 1, nodo.posY + 0, false, map.map_l1[(nodo.posX + 1) / 8][(nodo.posY + 0) / 8] == 0);
+	nodesAdyacentes[3] = Node(nodo.posX + 1, nodo.posY - 1, false, map.map_l1[(nodo.posX + 1) / 8][(nodo.posY - 1) / 8] == 0);
 
-	nodesAdyacentes[4] = Node(nodo.posX + 0, nodo.posY - 1, false, map.map_l1[(nodo.posX + 0) / 8][(nodo.posY - 1) / 8] == 0, NULL);
-	nodesAdyacentes[5] = Node(nodo.posX - 1, nodo.posY - 1, false, map.map_l1[(nodo.posX - 1) / 8][(nodo.posY - 1) / 8] == 0, NULL);
-	nodesAdyacentes[6] = Node(nodo.posX - 1, nodo.posY + 0, false, map.map_l1[(nodo.posX - 1) / 8][(nodo.posY + 0) / 8] == 0, NULL);
-	nodesAdyacentes[7] = Node(nodo.posX - 1, nodo.posY + 1, false, map.map_l1[(nodo.posX - 1) / 8][(nodo.posY + 1) / 8] == 0, NULL);
+	nodesAdyacentes[4] = Node(nodo.posX + 0, nodo.posY - 1, false, map.map_l1[(nodo.posX + 0) / 8][(nodo.posY - 1) / 8] == 0);
+	nodesAdyacentes[5] = Node(nodo.posX - 1, nodo.posY - 1, false, map.map_l1[(nodo.posX - 1) / 8][(nodo.posY - 1) / 8] == 0);
+	nodesAdyacentes[6] = Node(nodo.posX - 1, nodo.posY + 0, false, map.map_l1[(nodo.posX - 1) / 8][(nodo.posY + 0) / 8] == 0);
+	nodesAdyacentes[7] = Node(nodo.posX - 1, nodo.posY + 1, false, map.map_l1[(nodo.posX - 1) / 8][(nodo.posY + 1) / 8] == 0);
 }
 
 
-void Astar::GetMinorFNode(std::vector<Node> &listaAbierta, int &FMinor, Node &minorF)
+Node Astar::GetMinorFNode(std::vector<Node> listaAbierta)
 {
+	int FMinor = std::numeric_limits<int>::max();
+	Node nodeFMinor;
 	for (std::vector<Node>::iterator it = listaAbierta.begin(); it != listaAbierta.end(); ++it)
 	{
 		int ActualFValueToCheck = ((Node)*it).Fvalue;
 		if (ActualFValueToCheck < FMinor) {
 			FMinor = ActualFValueToCheck;
-			minorF = ((Node)*it);
+			nodeFMinor = ((Node)*it);
 		}
 	}
+	return nodeFMinor;
 }
 
 void RemoveFromList(std::vector<Node> &lista, Node &FMinor) {
@@ -121,8 +114,25 @@ void Astar::GetPath() {
 	while (!FoundInList(listaCerrada, nodoDestino) || listaAbierta.empty()) {
 		int FMinor = std::numeric_limits<int>::max();
 		Node nodeWithMinorF;
-		GetMinorFNode(listaAbierta, FMinor, nodeWithMinorF);
+		for each (Node var in listaAbierta)
+		{
+			int ActualFValueToCheck = var.Fvalue;
+			if (ActualFValueToCheck < FMinor) {
+				FMinor = ActualFValueToCheck;
+			}
+		}
+		for each (Node var in listaAbierta)
+		{
+			int ActualFValueToCheck = var.Fvalue;
+			if (var.Fvalue == FMinor) {
+
+				nodeWithMinorF = var;
+				break;
+			}
+		}
+		//Node nodeWithMinorF = GetMinorFNode(listaAbierta);
 		loading = true;
+
 		listaCerrada.push_back(nodeWithMinorF);
 		GetAdyacentes(nodeWithMinorF);
 		RemoveFromList(listaAbierta, nodeWithMinorF);
@@ -131,26 +141,40 @@ void Astar::GetPath() {
 			if (nodesAdyacentes[i]._transitable && !FoundInList(listaCerrada, nodesAdyacentes[i])) {
 
 				if (!FoundInList(listaAbierta, nodesAdyacentes[i])) {
-					//nodesAdyacentes[i]._parent = &nodeWithMinorF;
-					nodeWithMinorF._parent = &nodesAdyacentes[i];
 					int h = GetHeuristic(nodesAdyacentes[i], nodoDestino);
 					int g = GetGValue(nodeWithMinorF, nodesAdyacentes[i]);
-					nodesAdyacentes[i].Fvalue = g + h;
 					nodesAdyacentes[i].Gvalue = g;
 					nodesAdyacentes[i].Hvalue = h;
-					//FillValuesNode(minorF, nodesAdyacentes[i], nodoDestino);
+					nodesAdyacentes[i].Fvalue = g + h;
+					//SetParent(nodesAdyacentes[i], nodeWithMinorF);
+					Node* parent = new Node(nodeWithMinorF.posX, nodeWithMinorF.posY, nodeWithMinorF._destino, nodeWithMinorF._transitable);
+					parent->Fvalue = nodeWithMinorF.Fvalue;
+					parent->Gvalue = nodeWithMinorF.Gvalue;
+					parent->Hvalue = nodeWithMinorF.Hvalue;
+					parent->_parent = &nodeWithMinorF;
+					nodesAdyacentes[i]._parent = parent;
+					//SetParent(nodesAdyacentes[i], nodeWithMinorF);
 					listaAbierta.push_back(nodesAdyacentes[i]);
+
 				}
 				else {
 					Node nodoFromList = GetFromList(listaAbierta, nodesAdyacentes[i]);
 					if (nodoFromList.Gvalue < nodeWithMinorF.Gvalue) {
 						RemoveFromList(listaAbierta, nodeWithMinorF);
 
-						nodoFromList._parent = &nodeWithMinorF;
 						int g = GetGValue(nodoFromList, nodeWithMinorF);
 						nodeWithMinorF.Gvalue = g;
-						nodeWithMinorF.Fvalue = g + nodoFromList.Hvalue;
-						listaAbierta.push_back(nodeWithMinorF);
+						nodeWithMinorF.Fvalue = g + nodeWithMinorF._parent->Hvalue;
+
+						Node* parent = new Node(nodeWithMinorF.posX, nodeWithMinorF.posY, nodeWithMinorF._destino, nodeWithMinorF._transitable);
+						parent->Fvalue = nodeWithMinorF.Fvalue;
+						parent->Gvalue = nodeWithMinorF.Gvalue;
+						parent->Hvalue = nodeWithMinorF.Hvalue;
+						parent->_parent = &nodeWithMinorF;
+						nodoFromList._parent = parent;
+
+
+						listaAbierta.push_back(nodoFromList);
 
 					}
 				}
@@ -162,6 +186,7 @@ void Astar::GetPath() {
 	//CreatePathFromDestination(&nodoDestino, camino);
 	loading = !loading;
 }
+
 
 MathLib::Vec2 Astar::GetNextPosition(Node &inicio)
 {
@@ -179,4 +204,19 @@ MathLib::Vec2 Astar::GetNextPosition(Node &inicio)
 	}
 
 	return newPosition;
+}
+
+std::vector<Node> Astar::GetCamino()
+{
+	std::vector<Node> camino;
+	Node nodeDestino = listaCerrada.at(listaCerrada.size() - 1);
+	do {
+		if (nodeDestino._parent != NULL) {
+			Node nodoFromList = GetFromList(listaCerrada, *nodeDestino._parent);
+
+			camino.push_back(nodeDestino);
+			nodeDestino = nodoFromList;
+		}
+	} while (nodeDestino._parent != NULL);
+	return camino;
 }

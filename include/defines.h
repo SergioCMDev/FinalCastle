@@ -32,10 +32,11 @@
 #define MAP "../media/mapa.bmp"
 #define MAP_COSTES "../media/costes.bmp"
 
-#define MAX_AGENTS 5
+#define MAX_AGENTS 1
 #define FPS_FONT_SIZE 12
 
 const MathLib::Vec2 ENTRADA_ZONA_DESCANSO(144, 468);
+const MathLib::Vec2 ZONA_TRABAJO(290, 322);
 
 const int HORIZONTAL_COST = 1;
 const int VERTICAL_COST = 2;
@@ -98,5 +99,10 @@ template <typename T> int sign(T val) {
 inline bool DifferentPositions(const MathLib::Vec2 pos1, const MathLib::Vec2 pos2 ) {
 	return pos1.x() != pos2.x() || pos1.y() != pos2.y();
 }
+
+inline bool SamePositions(const MathLib::Vec2 pos1, const MathLib::Vec2 pos2) {
+	return pos1.x() == pos2.x() && pos1.y() == pos2.y();
+}
+
 
 #endif

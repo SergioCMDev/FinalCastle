@@ -22,7 +22,6 @@ void Body::init(const Type type, Agent* agent) {
 		int randomValueY = rand();
 		setPosition(MathLib::Vec2(229, 393));
 
-		//getKinematic()->position = MathLib::Vec2(0, 0);
 		break; }
 	case Agent::Type::Soldier: {
 		sprite_.loadFromFile(AGENT_SOLDIER);
@@ -40,7 +39,6 @@ void Body::init(const Type type, Agent* agent) {
 		int y = GetRandomInt(490, 890);
 		setPosition(MathLib::Vec2(x, y));
 		break; }
-
 	}
 	//steering_mode_ = SteeringMode::Kinematic_Seek;
 }
