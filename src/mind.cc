@@ -39,22 +39,7 @@ void Mind::update(const uint32_t dt) {
 
 			}
 			else if (DifferentPositions(actualPosition, ENTRADA_ZONA_DESCANSO)) {
-				if (astar.listaCerrada.empty() || getNewPath) {
-					astar.listaCerrada.clear();
-
-					astar.SetValues(actualPosition, ENTRADA_ZONA_DESCANSO);
-					astar.GetPath();
-					getNewPath = false;
-				}
-				Node inicio = Node(actualPosition.x(), actualPosition.y(), false, false);
-
-				MathLib::Vec2 newPosition = astar.GetNextPosition(inicio);
-				if (!SamePositions(newPosition, MathLib::Vec2(0, 0))) {
-
-					MathLib::Vec2 offset = (newPosition - actualPosition);
-					body_->setPosition(actualPosition + MathLib::Vec2(offset.x(), offset.y()));
-				}
-				inicio.~Node();
+				GoToDestination(actualPosition, ENTRADA_ZONA_DESCANSO);
 			}
 
 		}
@@ -65,21 +50,7 @@ void Mind::update(const uint32_t dt) {
 
 			}
 			if (DifferentPositions(actualPosition, ZONA_TRABAJO)) {
-				Node inicio = Node(actualPosition.x(), actualPosition.y(), false, false);
-
-				if (astar.listaCerrada.empty() || getNewPath) {
-					astar.listaCerrada.clear();
-					astar.listaCerrada.push_back(inicio);
-					astar.SetValues(actualPosition, ZONA_TRABAJO);
-					astar.GetPath();
-					getNewPath = false;
-				}
-
-				MathLib::Vec2 newPosition = astar.GetNextPosition(inicio);
-
-				MathLib::Vec2 offset = (newPosition - actualPosition);
-				body_->setPosition(actualPosition + MathLib::Vec2(offset.x(), offset.y()));
-				inicio.~Node();
+				GoToDestination(actualPosition, ZONA_TRABAJO);
 			}
 			else {
 				agent_->status_ == Agent::Status::Working;
@@ -95,21 +66,7 @@ void Mind::update(const uint32_t dt) {
 
 			}
 			if (DifferentPositions(actualPosition, ZONA_TRABAJO_FIN)) {
-				Node inicio = Node(actualPosition.x(), actualPosition.y(), false, false);
-
-				if (astar.listaCerrada.empty() || getNewPath) {
-					astar.listaCerrada.clear();
-					astar.listaCerrada.push_back(inicio);
-					astar.SetValues(actualPosition, ZONA_TRABAJO_FIN);
-					astar.GetPath();
-					getNewPath = false;
-				}
-
-				MathLib::Vec2 newPosition = astar.GetNextPosition(inicio);
-
-				MathLib::Vec2 offset = (newPosition - actualPosition);
-				body_->setPosition(actualPosition + MathLib::Vec2(offset.x(), offset.y()));
-				inicio.~Node();
+				GoToDestination(actualPosition, ZONA_TRABAJO_FIN);
 			}
 			else {
 				agent_->status_ == Agent::Status::Working;
@@ -119,6 +76,25 @@ void Mind::update(const uint32_t dt) {
 		}
 	};
 	}
+}
+
+void Mind::GoToDestination(MathLib::Vec2 &actualPosition, const MathLib::Vec2 &destination)
+{
+	Node inicio = Node(actualPosition.x(), actualPosition.y(), false, false);
+
+	if (astar.listaCerrada.empty() || getNewPath) {
+		astar.listaCerrada.clear();
+		astar.listaCerrada.push_back(inicio);
+		astar.SetValues(actualPosition, destination);
+		astar.GetPath();
+		getNewPath = false;
+	}
+
+	MathLib::Vec2 newPosition = astar.GetNextPosition(inicio);
+
+	MathLib::Vec2 offset = (newPosition - actualPosition);
+	body_->setPosition(actualPosition + MathLib::Vec2(offset.x(), offset.y()));
+	inicio.~Node();
 }
 
 
