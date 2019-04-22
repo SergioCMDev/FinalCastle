@@ -37,5 +37,6 @@ private:
 	std::vector<Node> camino;
 	Read_Map map;
 	int indiceListaAbierta = 0;
+	Node* CreateNewParent(Node nodeWithMinorF);
 };
 #endif

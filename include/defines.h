@@ -37,6 +37,7 @@
 
 const MathLib::Vec2 ENTRADA_ZONA_DESCANSO(144, 468);
 const MathLib::Vec2 ZONA_TRABAJO(290, 322);
+const MathLib::Vec2 ZONA_TRABAJO_FIN(690, 322);
 
 const int HORIZONTAL_COST = 1;
 const int VERTICAL_COST = 2;

@@ -106,6 +106,16 @@ void RemoveFromList(std::vector<Node> &lista, Node &FMinor) {
 	}
 }
 
+
+Node* Astar::CreateNewParent(Node nodeWithMinorF) {
+	Node* parent = new Node(nodeWithMinorF.posX, nodeWithMinorF.posY, nodeWithMinorF._destino, nodeWithMinorF._transitable);
+	parent->Fvalue = nodeWithMinorF.Fvalue;
+	parent->Gvalue = nodeWithMinorF.Gvalue;
+	parent->Hvalue = nodeWithMinorF.Hvalue;
+	parent->_parent = &nodeWithMinorF;
+	return parent;
+}
+
 void Astar::GetPath() {
 
 	listaAbierta.push_back(nodoInicial);
@@ -130,7 +140,6 @@ void Astar::GetPath() {
 				break;
 			}
 		}
-		//Node nodeWithMinorF = GetMinorFNode(listaAbierta);
 		loading = true;
 
 		listaCerrada.push_back(nodeWithMinorF);
@@ -146,14 +155,9 @@ void Astar::GetPath() {
 					nodesAdyacentes[i].Gvalue = g;
 					nodesAdyacentes[i].Hvalue = h;
 					nodesAdyacentes[i].Fvalue = g + h;
-					//SetParent(nodesAdyacentes[i], nodeWithMinorF);
-					Node* parent = new Node(nodeWithMinorF.posX, nodeWithMinorF.posY, nodeWithMinorF._destino, nodeWithMinorF._transitable);
-					parent->Fvalue = nodeWithMinorF.Fvalue;
-					parent->Gvalue = nodeWithMinorF.Gvalue;
-					parent->Hvalue = nodeWithMinorF.Hvalue;
-					parent->_parent = &nodeWithMinorF;
+
+					Node* parent = CreateNewParent(nodeWithMinorF);
 					nodesAdyacentes[i]._parent = parent;
-					//SetParent(nodesAdyacentes[i], nodeWithMinorF);
 					listaAbierta.push_back(nodesAdyacentes[i]);
 
 				}
@@ -166,13 +170,8 @@ void Astar::GetPath() {
 						nodeWithMinorF.Gvalue = g;
 						nodeWithMinorF.Fvalue = g + nodeWithMinorF._parent->Hvalue;
 
-						Node* parent = new Node(nodeWithMinorF.posX, nodeWithMinorF.posY, nodeWithMinorF._destino, nodeWithMinorF._transitable);
-						parent->Fvalue = nodeWithMinorF.Fvalue;
-						parent->Gvalue = nodeWithMinorF.Gvalue;
-						parent->Hvalue = nodeWithMinorF.Hvalue;
-						parent->_parent = &nodeWithMinorF;
+						Node* parent = CreateNewParent(nodeWithMinorF);
 						nodoFromList._parent = parent;
-
 
 						listaAbierta.push_back(nodoFromList);
 
@@ -183,7 +182,6 @@ void Astar::GetPath() {
 		nodeWithMinorF.Fvalue = std::numeric_limits<int>::max();
 		std::cout << "Loading..." << std::endl;
 	}
-	//CreatePathFromDestination(&nodoDestino, camino);
 	loading = !loading;
 }
 
