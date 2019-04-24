@@ -76,13 +76,13 @@ public:
 	void updateKinematic(const uint32_t dt, const KinematicSteering steering);
 	void setOrientation(const MathLib::Vec2& velocity);
 	KinematicStatus state_;
+	MathLib::Vec2 destination;
 private:
 	KinematicStatus* _agentToFlee;
 	Agent* _leader;
 	void updateManual(const uint32_t);
 	void keepInSpeed();
 	void keepInBounds();
-
 	Sprite sprite_;
 	Type type_;
 	SteeringMode steering_mode_;

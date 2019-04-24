@@ -21,13 +21,6 @@ void Game::init() {
 	}
 
 	fps_sprite_.setVisible(false);
-	//for (size_t i = 0; i < MAX_AGENTS; i++)
-	//{
-	//	soldiers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Soldier);
-	//	workers[i].init(&world_, Body::Type::Autonomous, Agent::Type::Worker);
-	//	guards[i].init(&world_, Body::Type::Autonomous, Agent::Type::Guard);
-	//}
-	//world_.target()->getKinematic()->position = MathLib::Vec2(0.0f, 0.0f);
 }
 
 void Game::start() {
@@ -102,15 +95,7 @@ void Game::handleInput() {
 					else {
 						destinoX = x;
 						destinoY = y;
-						astar = Astar();
-						astar.SetValues(origenX, origenY, destinoX, destinoY);
-						astar.GetPath();
-						render();
 					}
-
-					//world_.target()->getKinematic()->position = Vec2(x, y);
-
-
 				}
 			}
 		}

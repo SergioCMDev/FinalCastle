@@ -33,46 +33,41 @@ void Mind::update(const uint32_t dt) {
 		MathLib::Vec2 actualPosition = body_->getKinematic()->position;
 		if (agent_->status_ == Agent::Status::Relax) {
 
-			if (SamePositions(actualPosition, ENTRADA_ZONA_DESCANSO)) {
-				getNewPath = true;
-				agent_->status_ = Agent::Status::TimeToWork;
-
-			}
-			else if (DifferentPositions(actualPosition, ENTRADA_ZONA_DESCANSO)) {
-				GoToDestination(actualPosition, ENTRADA_ZONA_DESCANSO);
-			}
-
-		}
-		else if (agent_->status_ == Agent::Status::TimeToWork) {
 			if (SamePositions(actualPosition, ZONA_TRABAJO)) {
 				getNewPath = true;
 				agent_->status_ = Agent::Status::Working;
-
 			}
-			if (DifferentPositions(actualPosition, ZONA_TRABAJO)) {
-				GoToDestination(actualPosition, ZONA_TRABAJO);
-			}
-			else {
-				agent_->status_ == Agent::Status::Working;
-				getNewPath = true;
+			else if (DifferentPositions(actualPosition, ZONA_TRABAJO)) {
+				body_->destination = ZONA_TRABAJO;
 
+				GoToDestination(actualPosition, body_->destination);
 			}
-
 		}
 		else if (agent_->status_ == Agent::Status::Working) {
-			if (SamePositions(actualPosition, ZONA_TRABAJO_FIN)) {
+			if (SamePositions(actualPosition, ZONA_TRABAJO)) {
 				getNewPath = true;
-				agent_->status_ = Agent::Status::Working;
+				body_->destination = ZONA_TRABAJO_FIN_1;
+				//body_->destination = ZONA_TRABAJO_FIN_2;
+				//body_->destination = ZONA_TRABAJO_FIN_3;
+				//agent_->status_ = Agent::Status::Working;
 
 			}
-			if (DifferentPositions(actualPosition, ZONA_TRABAJO_FIN)) {
-				GoToDestination(actualPosition, ZONA_TRABAJO_FIN);
-			}
-			else {
-				agent_->status_ == Agent::Status::Working;
+			if (SamePositions(actualPosition, ZONA_TRABAJO_FIN_1)) {
 				getNewPath = true;
+				body_->destination = ZONA_TRABAJO;
+				//body_->destination = ZONA_TRABAJO_FIN_2;
+				//body_->destination = ZONA_TRABAJO_FIN_3;
+				//agent_->status_ = Agent::Status::Working;
 
 			}
+			if (DifferentPositions(actualPosition, body_->destination)) {
+				GoToDestination(actualPosition, body_->destination);
+			}
+			//else {
+			//	body_->destination = ZONA_TRABAJO;
+			//	//getNewPath = true;
+
+			//}
 		}
 	};
 	}
